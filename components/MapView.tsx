@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import type { Libraries } from '@react-google-maps/api';
 import StatusSelector from './StatusSelector';
 import { findNearbyUsers } from '@/utils/nearbyUsers';
 import { updateUserLocation } from '@/utils/location';
 import { UserMarker } from './UserMarker';
+import { Autocomplete } from '@react-google-maps/api';
 
 // 型定義
 interface User {
@@ -37,6 +39,8 @@ const center = {
   lat: 35.6762,  // 東京
   lng: 139.6503
 };
+
+const libraries: Libraries = ['places'];
 
 export default function MapView() {
   const navigate = useNavigate();
@@ -117,6 +121,12 @@ export default function MapView() {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handlePlaceSelect = (place: google.maps.places.PlaceResult) => {
+    if (place.geometry?.location) {
+      // 処理を追加
     }
   };
 
@@ -228,7 +238,10 @@ export default function MapView() {
 
       {/* Google Maps */}
       <div className="flex-1">
-        <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
+        <LoadScript
+          googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+          libraries={libraries}
+        >
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={center}
@@ -255,6 +268,22 @@ export default function MapView() {
           </div>
         </div>
       )}
+
+      <Autocomplete
+        onLoad={(autocomplete) => {
+          // 必要な処理
+        }}
+        onPlaceChanged={handlePlaceSelect}
+        options={{
+          componentRestrictions: { country: 'jp' }
+        }}
+      >
+        <input
+          type="text"
+          placeholder="場所を検索"
+          className="w-full p-2 border rounded"
+        />
+      </Autocomplete>
     </div>
   );
 } 
