@@ -10,7 +10,7 @@ interface ChatMessage {
 }
 
 // メッセージの型定義
-const handleMessage = (newMessage: any) => {
+const handleNewMessage = (newMessage: any) => {
   const formattedMessage: ChatMessage = {
     id: newMessage.id,
     content: newMessage.content,

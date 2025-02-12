@@ -40,7 +40,7 @@ const center = {
   lng: 139.6503
 };
 
-const libraries: Libraries = ['places'];
+const libraries = ['places'] as const;
 
 export default function MapView() {
   const navigate = useNavigate();
