@@ -16,7 +16,7 @@ const handleNewMessage = (newMessage: any) => {
     content: newMessage.content,
     user_id: newMessage.user_id,
     created_at: newMessage.created_at,
-    profiles: newMessage.profiles
+    profiles: newMessage.profiles || null  // nullを許容
   };
   
   setMessages(current => [...current, formattedMessage]);
