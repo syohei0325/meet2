@@ -1,9 +1,26 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/utils/supabaseClient';
-import { getUnreadNotifications, markNotificationAsRead } from '@/utils/notification';
+import { supabase } from '../utils/supabaseClient';
+import { getUnreadNotifications, markNotificationAsRead } from '../utils/notification';
+import React from 'react';
+
+interface Notification {
+  id: string;
+  content: string;
+  created_at: string;
+  link?: string;
+  sender?: {
+    id: string;
+    username: string;
+    avatar_url: string | null;
+  };
+  community?: {
+    id: string;
+    name: string;
+  };
+}
 
 export default function NotificationBell() {
-  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
@@ -21,7 +38,7 @@ export default function NotificationBell() {
           table: 'notifications',
         },
         (payload) => {
-          setNotifications(prev => [payload.new, ...prev]);
+          setNotifications(prev => [payload.new as Notification, ...prev]);
         }
       )
       .subscribe();

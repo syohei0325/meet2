@@ -1,3 +1,5 @@
+import React from "react";
+
 export function PrivacyNotice() {
   return (
     <div className="text-sm text-gray-500 mt-4">

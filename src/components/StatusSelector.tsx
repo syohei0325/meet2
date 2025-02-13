@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import { supabase } from '@/utils/supabaseClient';
+import React, { useState } from 'react';
+import { supabase } from '../utils/supabaseClient';
 
-const STATUS_OPTIONS = [
+interface StatusOption {
+  type: string;
+  label: string;
+}
+
+const STATUS_OPTIONS: StatusOption[] = [
   { type: 'online', label: 'オンライン' },
   { type: 'lunch', label: 'ランチ可能' },
   { type: 'meeting', label: '会議中' },
@@ -9,7 +14,11 @@ const STATUS_OPTIONS = [
   { type: 'offline', label: 'オフライン' }
 ];
 
-export default function StatusSelector() {
+interface StatusSelectorProps {
+  onStatusChange?: (status: string) => void;
+}
+
+export default function StatusSelector({ onStatusChange }: StatusSelectorProps) {
   const [currentStatus, setCurrentStatus] = useState('online');
 
   const updateStatus = async (statusType: string) => {
@@ -28,6 +37,7 @@ export default function StatusSelector() {
 
       if (error) throw error;
       setCurrentStatus(statusType);
+      onStatusChange?.(statusType);
     } catch (error) {
       console.error('ステータスの更新に失敗:', error);
     }
