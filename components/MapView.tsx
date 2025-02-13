@@ -1,13 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../utils/supabaseClient';
 import { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow, Autocomplete } from '@react-google-maps/api';
 import type { Libraries } from '@react-google-maps/api';
 import StatusSelector from './StatusSelector';
 import { findNearbyUsers } from '@/utils/nearbyUsers';
 import { updateUserLocation } from '@/utils/location';
 import { UserMarker } from './UserMarker';
-import { Autocomplete } from '@react-google-maps/api';
 
 // 型定義
 interface User {
@@ -40,7 +39,7 @@ const center = {
   lng: 139.6503
 };
 
-const libraries = ['places'] as const;
+const libraries: Libraries = ['places'];
 
 export default function MapView() {
   const navigate = useNavigate();
