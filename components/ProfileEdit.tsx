@@ -1,8 +1,12 @@
-import { useState } from 'react';
-import { uploadImage } from '@/utils/uploadImage';
-import { supabase } from '@/utils/supabaseClient';
+import React, { useState } from 'react';
+import { uploadImage } from '../utils/uploadImage';
+import { supabase } from '../utils/supabaseClient';
 
-export default function ProfileEdit() {
+interface ProfileEditProps {
+  onUpdate?: (url: string) => void;
+}
+
+export default function ProfileEdit({ onUpdate }: ProfileEditProps) {
   const [imageUrl, setImageUrl] = useState('');
   const [isUploading, setIsUploading] = useState(false);
 
@@ -48,6 +52,7 @@ export default function ProfileEdit() {
         }
         
         console.log('プロフィール更新成功');
+        onUpdate?.(url);
       }
     } catch (error) {
       console.error('画像アップロードに失敗しました:', error);
