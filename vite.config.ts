@@ -4,13 +4,13 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 3000  // ポート番号を3000に設定
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
     }
+  },
+  server: {
+    port: 3000
   },
   define: {
     'process.env': process.env

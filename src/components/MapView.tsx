@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../utils/supabaseClient';
+import { supabase } from '../lib/supabase';
 import { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Autocomplete } from '@react-google-maps/api';
 import type { Libraries } from '@react-google-maps/api';

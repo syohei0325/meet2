@@ -1,3 +1,6 @@
+import { supabase } from '../lib/supabase';
+import { createMessage } from '../utils/messages';
+
 interface ChatMessage {
   id: string;
   content: string;
