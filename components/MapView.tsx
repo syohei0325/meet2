@@ -125,7 +125,7 @@ export default function MapView() {
 
   const handlePlaceSelect = (place: google.maps.places.PlaceResult) => {
     if (place.geometry?.location) {
-      // 処理を追加
+      console.log('Selected place:', place.name);
     }
   };
 
@@ -270,7 +270,7 @@ export default function MapView() {
 
       <Autocomplete
         onLoad={(autocomplete) => {
-          // 必要な処理があれば追加
+          console.log('Autocomplete loaded');
         }}
         onPlaceChanged={handlePlaceSelect}
         options={{
