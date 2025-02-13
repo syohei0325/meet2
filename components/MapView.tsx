@@ -270,7 +270,7 @@ export default function MapView() {
 
       <Autocomplete
         onLoad={(autocomplete) => {
-          // 必要な処理
+          // 必要な処理があれば追加
         }}
         onPlaceChanged={handlePlaceSelect}
         options={{
