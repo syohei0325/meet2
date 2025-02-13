@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow, Autocomplete } from '@react-google-maps/api';
 import type { Libraries } from '@react-google-maps/api';
 import StatusSelector from './StatusSelector';
-import { findNearbyUsers } from '@/utils/nearbyUsers';
-import { updateUserLocation } from '@/utils/location';
+import { findNearbyUsers } from '../utils/nearbyUsers';
+import { updateUserLocation } from '../utils/location';
 import { UserMarker } from './UserMarker';
+import React from 'react';
 
 // 型定義
 interface User {
@@ -109,8 +110,7 @@ export default function MapView() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             radius: 5000,
-            status_type: selectedStatus,
-            onlyVisible: true
+            status_type: selectedStatus ?? undefined
           });
           setNearbyUsers(users);
         } catch (error) {
