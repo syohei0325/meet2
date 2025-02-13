@@ -9,7 +9,7 @@ interface ChatMessage {
   } | null;
 }
 
-// メッセージの型定義
+// メッセージ処理の修正
 const handleNewMessage = (newMessage: any) => {
   const formattedMessage: ChatMessage = {
     id: newMessage.id,
